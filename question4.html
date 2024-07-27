@@ -65,14 +65,40 @@
     <div class="container">
         <h1>What days do you plan on studying this topic?</h1>
         <div class="buttons">
-            <a href="question5.html">Monday</a>
-            <a href="question5.html">Tuesday</a>
-            <a href="question5.html">Wednesday</a>
-            <a href="question5.html">Thursday</a>
-            <a href="question5.html">Friday</a>
-            <a href="question5.html">Saturday</a>
-            <a href="question5.html">Sunday</a>
+            <a href="#" onclick="submitAnswer('Monday')">Monday</a>
+            <a href="#" onclick="submitAnswer('Tuesday')">Tuesday</a>
+            <a href="#" onclick="submitAnswer('Wednesday')">Wednesday</a>
+            <a href="#" onclick="submitAnswer('Thursday')">Thursday</a>
+            <a href="#" onclick="submitAnswer('Friday')">Friday</a>
+            <a href="#" onclick="submitAnswer('Saturday')">Saturday</a>
+            <a href="#" onclick="submitAnswer('Sunday')">Sunday</a>
         </div>
     </div>
+    <script>
+        function submitAnswer(answer) {
+            const questionText = "What days do you plan on studying this topic?";
+
+            fetch('http://localhost:3000/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    questionText: questionText,
+                    userAnswer: answer,
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Answer saved successfully!');
+                } else {
+                    console.error('Failed to save answer');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
