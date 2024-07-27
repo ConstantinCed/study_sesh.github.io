@@ -83,9 +83,36 @@
         <h1>Please provide an overview of the topic you want to study</h1>
         <p>The more detail you provide the more personalized the experience will be. We may ask you more specific questions inquiring your knowledge on specific subjects relevant to the topic you wish to learn.</p>
         <div class="input-container">
-            <textarea placeholder="Enter your overview here..."></textarea>
-            <a href="question1.html" class="button">Next</a>
+            <textarea id="overview" placeholder="Enter your overview here..."></textarea>
+            <a href="#" class="button" onclick="submitAnswer()">Next</a>
         </div>
     </div>
+    <script>
+        function submitAnswer() {
+            const questionText = "Please provide an overview of the topic you want to study";
+            const answer = document.getElementById('overview').value;
+
+            fetch('http://localhost:3000/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    questionText: questionText,
+                    userAnswer: answer,
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Answer saved successfully!');
+                } else {
+                    console.error('Failed to save answer');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
