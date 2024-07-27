@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Study Tracker</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             background: #1b1b2f url('future-artificial-intelligence.png') no-repeat center center fixed;
+            background-attachment: fixed;
             background-size: cover;
             margin: 0;
             padding: 0;
@@ -17,6 +19,7 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            color: #e0e0e0;
         }
         .container {
             background-color: rgba(22, 36, 71, 0.9);
@@ -26,38 +29,70 @@
             max-width: 600px;
             width: 100%;
             text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
         }
         h1 {
-            color: #e0e0e0;
-        }
-        p {
-            color: #e0e0e0;
+            font-size: 2.5em;
             margin-bottom: 20px;
         }
+        p {
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
         .button {
-            display: block;
-            width: 100%;
-            padding: 10px;
+            display: inline-block;
+            padding: 15px 30px;
             margin: 10px 0;
             background-color: #1f4068;
             color: #e0e0e0;
             text-align: center;
-            border-radius: 5px;
+            border-radius: 50px;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 1.1em;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         .button:hover {
             background-color: #e43f5a;
             transform: scale(1.05);
         }
+        .button i {
+            margin-left: 10px;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Study Tracker</h1>
+        <h1 id="welcomeMessage"></h1>
         <p>Our mission is to help you study effectively by using the best tools available. Let's get started by creating a new study topic.</p>
-        <a href="infoquestion1.html" class="button">Create a New Study Topic</a>
+        <a href="infoquestion1.html" class="button">Create a New Study Topic <i class="fas fa-arrow-right"></i></a>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const message = 'Welcome to Study Tracker';
+            let i = 0;
+            const speed = 100;
+            const welcomeMessageElement = document.getElementById('welcomeMessage');
+            
+            function typeWriter() {
+                if (i < message.length) {
+                    welcomeMessageElement.innerHTML += message.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+            
+            typeWriter();
+        });
+    </script>
 </body>
 </html>
