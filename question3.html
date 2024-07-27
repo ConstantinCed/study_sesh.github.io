@@ -65,15 +65,41 @@
     <div class="container">
         <h1>How many days a week will you study this topic?</h1>
         <div class="buttons">
-            <a href="question4.html">1</a>
-            <a href="question4.html">2</a>
-            <a href="question4.html">3</a>
-            <a href="question4.html">4</a>
-            <a href="question4.html">5</a>
-            <a href="question4.html">6</a>
-            <a href="question4.html">7</a>
-            <a href="question4.html">Others</a>
+            <a href="#" onclick="submitAnswer('1')">1</a>
+            <a href="#" onclick="submitAnswer('2')">2</a>
+            <a href="#" onclick="submitAnswer('3')">3</a>
+            <a href="#" onclick="submitAnswer('4')">4</a>
+            <a href="#" onclick="submitAnswer('5')">5</a>
+            <a href="#" onclick="submitAnswer('6')">6</a>
+            <a href="#" onclick="submitAnswer('7')">7</a>
+            <a href="#" onclick="submitAnswer('Others')">Others</a>
         </div>
     </div>
+    <script>
+        function submitAnswer(answer) {
+            const questionText = "How many days a week will you study this topic?";
+
+            fetch('http://localhost:3000/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    questionText: questionText,
+                    userAnswer: answer,
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Answer saved successfully!');
+                } else {
+                    console.error('Failed to save answer');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
