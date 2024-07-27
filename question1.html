@@ -65,11 +65,37 @@
     <div class="container">
         <h1>How will you be studying?</h1>
         <div class="buttons">
-            <a href="question2.html">Computer</a>
-            <a href="question2.html">iPad</a>
-            <a href="question2.html">Notebook</a>
-            <a href="question2.html">Book</a>
+            <a href="#" onclick="submitAnswer('Computer')">Computer</a>
+            <a href="#" onclick="submitAnswer('iPad')">iPad</a>
+            <a href="#" onclick="submitAnswer('Notebook')">Notebook</a>
+            <a href="#" onclick="submitAnswer('Book')">Book</a>
         </div>
     </div>
+    <script>
+        function submitAnswer(answer) {
+            const questionText = "How will you be studying?";
+            
+            fetch('http://localhost:3000/questions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    questionText: questionText,
+                    userAnswer: answer,
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Answer saved successfully!');
+                } else {
+                    console.error('Failed to save answer');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
 </body>
 </html>
